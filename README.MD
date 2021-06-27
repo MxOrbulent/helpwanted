@@ -17,7 +17,7 @@ Fabric API needs to be installed on both client and server.
 I wanted to remap this myself for the experience. And it succeeded, it works perfectly.
 I'd also suggest to others that if you release something as "CopyLeft" or Public Domain, that you also
 release the source. If you use git, it takes basically no time at all to do it.
-If you want to be a greedy handrubber and keep the code to yourself, don't use things like a MIT license.
+
 
 ### Don't you need to ask for permission?
 The original creator set his release as MIT, this means that doing basically anything with the compiled binaries are
