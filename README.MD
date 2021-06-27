@@ -44,16 +44,16 @@ However considering the mod feels pretty much complete, I doubt any major change
 
 ### Finally, any other reason why you wanted the source.
 I want to add config values.
-LIMIT_NUMBER_OF_REQRUITABLE_VILLAGERS_AROUND_SIGN (true/false)
-LIMIT_NUMBER_OF_VISITING_PIGLINS_AROUND_SIGN (true/false)
-DISABLE_EMERALD_BLOCK (true/false)
-SCALE_EXPENSIVITY (true/false)
-DISABLE_CHANCE (true/false) **Effectively makes blocks a requirement in order to reqruit**
-SET_CHANCE(0.000-1.000) **This is a double value where 0.005 for example means 0,5% chance, 
+- LIMIT_NUMBER_OF_REQRUITABLE_VILLAGERS_AROUND_SIGN (true/false)
+- LIMIT_NUMBER_OF_VISITING_PIGLINS_AROUND_SIGN (true/false)
+- DISABLE_EMERALD_BLOCK (true/false)
+- SCALE_EXPENSIVITY (true/false)
+- DISABLE_CHANCE (true/false) **Effectively makes blocks a requirement in order to reqruit**
+- SET_CHANCE(0.000-1.000) **This is a double value where 0.005 for example means 0,5% chance, 
 and where 1.000 means 100% chance.**
-SEARCH_RADIUS_AROUND_SIGN (0-256)
-VILLAGER_LIMIT (1-100)
-PIGLIN_LIMIT (1-100)
+- SEARCH_RADIUS_AROUND_SIGN (0-256)
+- VILLAGER_LIMIT (1-100)
+- PIGLIN_LIMIT (1-100)
 
 Basically, it allows server owners to limit the amount of villagers and piglins that a sign
 can attract in a area. Whenever the code rolls for a spawn, it searches the area around the sign and if
