@@ -8,6 +8,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -121,6 +122,11 @@ public class VillagerPost extends BlockWithEntity {
                            VillagerEntity villager = EntityType.VILLAGER.create(this.world);
                            villager.refreshPositionAndAngles(bp.getX(), bp.getY(), bp.getZ(), 0.0F, 0.0F);
                            this.world.spawnEntity(villager);
+                           //This was some test code to see if everything works, and it does.
+                           /*LightningEntity gonnagetroasted = new LightningEntity(EntityType.LIGHTNING_BOLT,this.world);
+                           gonnagetroasted.setPosition(villager.world.getClosestPlayer(villager.getX(),villager.getY(),villager.getZ(),100,false).getPos());
+                           this.world.spawnEntity(gonnagetroasted);*/
+                           //End of test code.
                            return;
                         }
                      }
