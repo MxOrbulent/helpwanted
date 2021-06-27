@@ -40,7 +40,7 @@ However considering the mod feels pretty much complete, I doubt any major change
 
 ### Finally, any other reason why you wanted the source.
 I want to add config values so one can nerf/buff the mod. I think the current settings are to overpowered 
-no reqruitmentlimit makes trying to build a proper village for breeding pointless.
+and no reqruitmentlimit makes trying to build a proper village for breeding pointless.
 - LIMIT_NUMBER_OF_REQRUITABLE_VILLAGERS_AROUND_SIGN (true/false)
 - LIMIT_NUMBER_OF_VISITING_PIGLINS_AROUND_SIGN (true/false)
 - EMERALD_BLOCK (true/false/2x)
