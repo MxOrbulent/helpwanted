@@ -41,6 +41,10 @@ dependencies {
 	 // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:22.0'
 
+	//jackson for JSOn configuration stuff. I want to avoid google as much as possible, so no gson.
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
+
+
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 	
