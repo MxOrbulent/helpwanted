@@ -1,22 +1,32 @@
 # Helpwanted (FABRIC ONLY)
 A mod that allows you to attract villagers to come work for you.
-This is a client/server mod, both the client and the server must have the mod installed.
-If you absolutely must have a non-client version, something you will often see
+This mod can be used on client for singleplayer or client and server for multiplayer.
+If you absolutely must have a non-client version (aka server only), something you will often see
 mentioned in this readme is: Do it yourself.
+Hint: A mod becomes client neccesary when it messes with graphics and adds or removes graphical stuff such as blocks, monsters rendering, custom animations and more.
+I'd suggest deleting the custom blocks etc from a fork of your own, and then using a vanilla sign and allowing players to put something like
+
+Villager
+Help
+Wanted!
+As text on the sign, which would make the server register the sign as a "help wanted" sign when the player finishes writing the text on the sign.
 
 Credit:
-Original creator: captaintenneal81 https://www.curseforge.com/members/captaintenneal81/followers
-Decompilation work and remapping: MxOrbulent (www.mxorbulent.space) https://github.com/MxOrbulent
+
+- Original creator: captaintenneal81 https://www.curseforge.com/members/captaintenneal81/followers 
+- Decompilation work and remapping: MxOrbulent (www.mxorbulent.space) https://github.com/MxOrbulent
 
 ### Dependencies
 Fabric API. https://www.curseforge.com/minecraft/mc-mods/fabric-api
-
 Fabric API needs to be installed on both client and server.
+
+# FAQ:
 
 ### Why not simply ask the original creator for source?
 I wanted to remap this myself for the experience. And it succeeded, it works perfectly.
-I'd also suggest to others that if you release something as "CopyLeft" or Public Domain, that you also
+I'd also suggest to others that if you release something as Public Domain, that you also
 release the source. If you use git, it takes basically no time at all to do it.
+You are of course under no obligation to do so. But it would be helpfull.
 
 
 ### Don't you need to ask for permission?
@@ -30,15 +40,16 @@ and remapping. If you can't be arsed to atleast try, you should not be running a
 ### Will you maintain this?
 No guarantees. If my own server project succeeds then yes I will maintain it.
 If the mod author releases his source code proper, then I will not maintain this repo for public use.
-I would simply fork his then and apply the changes I want.
+I would simply fork his then and apply the changes I want. 
 
 ### What version is this for currently and will you backport?
-1.17 and no I will not backport this. You have the source, do it yourself.
+1.17 and no I will not backport this. You have the source, "do it yourself™".
+
 If I decide to maintain this I will only support 1.17.x and onwards.
 Any changes the original mod author makes will be investigated and if neccesary, merged and remapped.
 However considering the mod feels pretty much complete, I doubt any major changes will be made.
 
-### Finally, any other reason why you wanted the source.
+### Finally, any other reason why you wanted the source and why you did this?
 I want to add config values so one can nerf/buff the mod. I think the current settings are to overpowered 
 and no reqruitmentlimit makes trying to build a proper village for breeding pointless.
 - LIMIT_NUMBER_OF_REQRUITABLE_VILLAGERS_AROUND_SIGN (true/false)
@@ -53,6 +64,8 @@ and where 1.000 means 100% chance.**
 - SEARCH_RADIUS_AROUND_SIGN (0-256)
 - VILLAGER_LIMIT (1-100)
 - PIGLIN_LIMIT (1-100)
+
+I'm also in no mood to wait for updates etc, I like to update mods and make forks for my own server project whenever possible.
 
 Basically, it allows server owners to limit the amount of villagers and piglins that a sign
 can attract in a area. Whenever the code rolls for a spawn, it searches the area around the sign and if
@@ -70,4 +83,5 @@ For example if 4 villagers are near the sign, then you'd need 4 emerald blocks t
 
 CHANCE_OF_EXTRA_VILLAGER_DIAMOND_BLOCK allows you to have a small chance to get 2 villagers instead of just 1.
 ### I have changes I want to make
-Fork the repo. If your idea is good you can attempt to make a pull request.
+Fork the repo. If your idea is good you can attempt to make a pull request. I will accept them if they make sense.
+But I ask that you please wait until I'm done implementing the config so that we have a proper baseline to move on from onwards.
