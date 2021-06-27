@@ -12,6 +12,7 @@ Wanted!
 As text on the sign, which would make the server register the sign as a "help wanted" sign when the player finishes writing the text on the sign.
 
 Credit:
+
 Original creator: captaintenneal81 https://www.curseforge.com/members/captaintenneal81/followers
 Decompilation work and remapping: MxOrbulent (www.mxorbulent.space) https://github.com/MxOrbulent
 
