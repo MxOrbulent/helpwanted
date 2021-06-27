@@ -19,6 +19,10 @@ This will add/remove the players UUID.
 If you have a permission mod of some kind, the permission to grant access to the config is 
 **helpwanted.configperm**
 
+**Do note that Cloth Config is clientsided. But the player simply will not
+be able to make changes to the config values on the server without the permission, and when
+they reopen the config the values will be what the server has.**
+
 ### Why not simply ask the original creator for source?
 I wanted to remap this myself for the experience. And it succeeded, it works perfectly.
 I'd also suggest to others that if you release something as "CopyLeft" or Public Domain, that you also
