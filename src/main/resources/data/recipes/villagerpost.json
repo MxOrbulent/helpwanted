@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "elevator",
+  "pattern": [
+    "WWW",
+    "WFW",
+    " E "
+  ],
+  "key": {
+    "W": {
+      "tag": "minecraft:planks"
+    },
+    "E":{
+      "item": "minecraft:stick"
+    },
+    "F": {
+      "item": "minecraft:red_dye"
+    }
+  },
+  "result": {
+    "item": "helpwanted:villagerpost"
+  }
+}

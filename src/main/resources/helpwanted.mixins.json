@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "space.mxorbulent.fabricmods.helpwanted.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "helpwanted-refmap.json"
+}
