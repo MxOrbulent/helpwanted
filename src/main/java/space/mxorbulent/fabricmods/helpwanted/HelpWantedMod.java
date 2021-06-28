@@ -7,5 +7,6 @@ public class HelpWantedMod implements ModInitializer {
 
    public void onInitialize() {
       VillagerPost.init();
+      PiglinPost.init();
    }
 }
