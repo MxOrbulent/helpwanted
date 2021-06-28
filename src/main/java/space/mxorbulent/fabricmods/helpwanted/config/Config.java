@@ -24,10 +24,9 @@ public class Config {
 
         if (configfile.exists()) {
             try {
-                Map<String, Object> map = mapper.readValue(configfile, Map.class);
 
-                this.configmap = map;
-                if ((boolean)this.configmap.get("DEBUGMOD") && this.WasUnableToCreateOrLoadConfigFile == false) {
+                this.configmap = mapper.readValue(configfile, Map.class);
+                if ((boolean)this.configmap.get("DEBUGMOD") && !this.WasUnableToCreateOrLoadConfigFile) {
                     System.out.println("[HelpWantedExtended-D]: Loading the config file");
                 }
             } catch (IOException e) {
@@ -54,7 +53,7 @@ public class Config {
                 this.configmap.put("DEBUGCONFIG",true); //Prints the config values at the start.
                 this.configmap.put("DEBUGMOD",true); //Prints to console whenever we roll some random or spawn a entity.
                 mapper.writeValue(configfile,this.configmap);
-                if ((boolean)this.configmap.get("DEBUGCONFIG") && this.WasUnableToCreateOrLoadConfigFile == false) {
+                if ((boolean)this.configmap.get("DEBUGCONFIG") && !this.WasUnableToCreateOrLoadConfigFile) {
                     System.out.println("[HelpWantedExtended-D]: Printing location of the created config file.");
                     System.out.println(configfile.getAbsolutePath());
                 }

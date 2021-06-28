@@ -39,12 +39,12 @@ public class VillagerPost extends BlockWithEntity {
    public static void init() {
       Registry.register((Registry)Registry.BLOCK, new Identifier("helpwanted", "villagerpost"), (Object)VillagerPost.THIS_BLOCK);
       Registry.register((Registry)Registry.ITEM, new Identifier("helpwanted", "villagerpost"), (Object)new BlockItem(VillagerPost.THIS_BLOCK, new Item.Settings().group(ItemGroup.MISC)));
-      VillagerPost.VILLAGERPOST_ENTITY = (BlockEntityType<VillagerPostEntity>) FabricBlockEntityTypeBuilder.create(VillagerPost.VillagerPostEntity::new, new Block[]
-              {VillagerPost.THIS_BLOCK}).build((Type)null);
+      VillagerPost.VILLAGERPOST_ENTITY = FabricBlockEntityTypeBuilder.create(VillagerPostEntity::new, new Block[]
+              {VillagerPost.THIS_BLOCK}).build(null);
       Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier("helpwanted", "villagerpost"), VillagerPost.VILLAGERPOST_ENTITY);
       configmanager = new Config(new File("config/helpwantedextended/config.json"));
-      if (configmanager.WasUnableToCreateOrLoadConfigFile == false) {
-         if ((boolean)configmanager.configmap.get("DEBUGCONFIG") == true) {
+      if (!configmanager.WasUnableToCreateOrLoadConfigFile) {
+         if ((boolean) configmanager.configmap.get("DEBUGCONFIG")) {
             System.out.println("[HelpWantedExtended-D]: Printing the config values, you should see different values " +
                     "if you change stuff in the config after stopping and starting.");
             System.out.println("----------------------------------------");
@@ -124,16 +124,16 @@ public class VillagerPost extends BlockWithEntity {
          System.out.println("Formula is:" + searchradius*10);
          System.out.println("searchradius is: " + searchradius);
          int limit = 4; //DefaultLimit for both villagers and piglins.
-         ArrayList<UUID> foundvillagers = new ArrayList<UUID>();
+
          if (searchradius == 0) {return false;}
          if (typeofentity.equals(EntityType.PIGLIN)) {limit = (Integer) configmanager.configmap.get("PIGLIN_LIMIT");
-            if((boolean) configmanager.configmap.get("DEBUGMOD") == true && configmanager.WasUnableToCreateOrLoadConfigFile == false){
+            if((boolean) configmanager.configmap.get("DEBUGMOD") && !configmanager.WasUnableToCreateOrLoadConfigFile){
                System.out.println("[HelpWantedExtended-D]: We will search for piglins within the bounding box whose" +
                        " origin is the sign.");
 
             }}
          else if (typeofentity.equals(EntityType.VILLAGER)) {limit = (Integer) configmanager.configmap.get("VILLAGER_LIMIT");
-         if((boolean) configmanager.configmap.get("DEBUGMOD") == true && configmanager.WasUnableToCreateOrLoadConfigFile == false){
+         if((boolean) configmanager.configmap.get("DEBUGMOD") && !configmanager.WasUnableToCreateOrLoadConfigFile){
             System.out.println("[HelpWantedExtended-D]: We will search for villagers within the bounding box whose" +
                     " origin is the sign.");
          }}
@@ -143,7 +143,7 @@ public class VillagerPost extends BlockWithEntity {
 
 
          boxtosearch =  boxtosearch.expand(searchradius*10);
-         if((boolean) configmanager.configmap.get("DEBUGMOD") == true && configmanager.WasUnableToCreateOrLoadConfigFile == false){
+         if((boolean) configmanager.configmap.get("DEBUGMOD") && !configmanager.WasUnableToCreateOrLoadConfigFile){
             System.out.println("[HelpWantedExtended-D]: The bounding box's first corner is X: "+boxtosearch.minX+" " +
                     "and Z: "+boxtosearch.minZ);
             System.out.println("[HelpWantedExtended-D]: The bounding box's second corner is X: "+boxtosearch.maxX+" " +
@@ -156,14 +156,14 @@ public class VillagerPost extends BlockWithEntity {
 
          List listofentitiesfound = worldtosearch.getEntitiesByType(typeofentity, boxtosearch, (VillagerEntity) -> true);
          if (listofentitiesfound.size() >= limit) {
-            if((boolean) configmanager.configmap.get("DEBUGMOD") == true && configmanager.WasUnableToCreateOrLoadConfigFile == false){
+            if((boolean) configmanager.configmap.get("DEBUGMOD") && !configmanager.WasUnableToCreateOrLoadConfigFile){
                System.out.println("[HelpWantedExtended-D]: The limit of entities allowed has been reached or " +
                        "surpassed. We will not spawn another");
                System.out.println("[HelpWantedExtended-D]: Number of villagers found:" + listofentitiesfound.size());
             }
 
             return true;}
-         if((boolean) configmanager.configmap.get("DEBUGMOD") == true && configmanager.WasUnableToCreateOrLoadConfigFile == false){
+         if((boolean) configmanager.configmap.get("DEBUGMOD") && !configmanager.WasUnableToCreateOrLoadConfigFile){
             System.out.println("[HelpWantedExtended-D]: The limit was not reached or surpassed, we will allow " +
                     "spawning!");
             System.out.println("[HelpWantedExtended-D]: Number of villagers found:" + listofentitiesfound.size());
@@ -173,17 +173,14 @@ public class VillagerPost extends BlockWithEntity {
       }
 
       public void tick() {
-         if (!this.world.isClient) {
+         if (this.world != null && !this.world.isClient) {
             if (this.delay++ > 20) {
                this.delay = 0;
-               boolean daychange = false;
-               if (!this.wasDay && this.world.isDay()) {
-                  daychange = true;
-               }
+               boolean daychange = !this.wasDay && this.world.isDay();
 
                this.wasDay = this.world.isDay();
                if (daychange) {
-                  for(int i = 0; i < 8; ++i) {
+                  for (int i = 0; i < 8; ++i) {
                      //Nestling the chance to spawn within a for loop checking for blocks are a very bad solution
                      //in my opinion. TODO split blocklookup and chance to spawn and actual spawn mechanics.
                      //Basically "lucky" ran 8 times. meaning the actual chance was 8 out of 128. Or about 6,3% chance.
@@ -193,7 +190,7 @@ public class VillagerPost extends BlockWithEntity {
                      //Blockpos was named bp, which sounds like blockposition.
                      //Due to the this keyword, I'd say it's the blockposition of the sign.
                      BlockPos actualpositionofsign = this.pos;
-                     BlockPos blockpositionofsign = this.pos.add(NL[i * 2 + 0], 0, NL[i * 2 + 1]);
+                     BlockPos blockpositionofsign = this.pos.add(NL[i * 2], 0, NL[i * 2 + 1]);
                      BlockState bn = this.world.getBlockState(blockpositionofsign);
                      BlockState bu = this.world.getBlockState(blockpositionofsign.add(0, 1, 0));
                      Random rnd = new Random();
@@ -201,21 +198,21 @@ public class VillagerPost extends BlockWithEntity {
                         boolean lucky = false;
                         if (bn.getBlock() == Blocks.AIR) {
                            if ((Integer) configmanager.configmap.get("CHANCE_OF_ARRIVAL") < 0) {
-                              configmanager.configmap.put("CHANCE_OF_ARRIVAL",0);
+                              configmanager.configmap.put("CHANCE_OF_ARRIVAL", 0);
                            }
                            if ((Integer) configmanager.configmap.get("CHANCE_OF_ARRIVAL") > 0) {
-                           if (rnd.nextInt(1600) <= (Integer) configmanager.configmap.get("CHANCE_OF_ARRIVAL")) {
-                              lucky = true;
+                              if (rnd.nextInt(1600) <= (Integer) configmanager.configmap.get("CHANCE_OF_ARRIVAL")) {
+                                 lucky = true;
 
-                           }
+                              }
 
 
                            }
                         }
 
-                        if (bn.getBlock() == Blocks.GOLD_BLOCK || bn.getBlock() == Blocks.EMERALD_BLOCK || bn.getBlock() == Blocks.DIAMOND_BLOCK || lucky ) {
+                        if (bn.getBlock() == Blocks.GOLD_BLOCK || bn.getBlock() == Blocks.EMERALD_BLOCK || bn.getBlock() == Blocks.DIAMOND_BLOCK || lucky) {
                            if (!lucky && configmanager.configmap.get("EMERALD_BLOCK").toString().equals("false") && bn.getBlock() == Blocks.EMERALD_BLOCK) {
-                              if((boolean) configmanager.configmap.get("DEBUGMOD") == true && configmanager.WasUnableToCreateOrLoadConfigFile == false){
+                              if ((boolean) configmanager.configmap.get("DEBUGMOD") && !configmanager.WasUnableToCreateOrLoadConfigFile) {
                                  System.out.println("[HelpWantedExtended-D]: lucky was false and emerald blocks are " +
                                          "disabled as a block that villagers are attracted to, " +
                                          "so we won't spawn anything now.");
@@ -225,14 +222,17 @@ public class VillagerPost extends BlockWithEntity {
                               return;
                            }
                            boolean SkipSpawnDueToLimit = false;
-                           if ((Boolean) configmanager.configmap.get("LIMIT_NUMBER_OF_REQRUITABLE_VILLAGERS_AROUND_SIGN") == true ||
-                                   (Boolean) configmanager.configmap.get("LIMIT_NUMBER_OF_VISITING_PIGLINS_AROUND_SIGN") == true && configmanager.WasUnableToCreateOrLoadConfigFile == false)
-                           {SkipSpawnDueToLimit = this.searchForEntitiesAroundSign(actualpositionofsign,this.world,EntityType.VILLAGER);}
-                           if (SkipSpawnDueToLimit == true) {return;}
+                           if ((Boolean) configmanager.configmap.get("LIMIT_NUMBER_OF_REQRUITABLE_VILLAGERS_AROUND_SIGN") ||
+                                   (Boolean) configmanager.configmap.get("LIMIT_NUMBER_OF_VISITING_PIGLINS_AROUND_SIGN") && !configmanager.WasUnableToCreateOrLoadConfigFile) {
+                              SkipSpawnDueToLimit = this.searchForEntitiesAroundSign(actualpositionofsign, this.world, EntityType.VILLAGER);
+                           }
+                           if (SkipSpawnDueToLimit) {
+                              return;
+                           }
                            this.world.setBlockState(blockpositionofsign, Blocks.AIR.getDefaultState());
                            if (bn.getBlock() == Blocks.DIAMOND_BLOCK) {
                               if (rnd.nextInt(200) <= (Integer) configmanager.configmap.get("DIAMOND_EXTRA_VILLAGER_CHANCE")) {
-                                 if((boolean) configmanager.configmap.get("DEBUGMOD") == true && configmanager.WasUnableToCreateOrLoadConfigFile == false){
+                                 if ((boolean) configmanager.configmap.get("DEBUGMOD") && !configmanager.WasUnableToCreateOrLoadConfigFile) {
                                     System.out.println("[HelpWantedExtended-D]: Successfull roll for spawning two " +
                                             "villagers due to a diamond block being nearby.");
 
@@ -240,22 +240,25 @@ public class VillagerPost extends BlockWithEntity {
 
 
                                  VillagerEntity villager = EntityType.VILLAGER.create(this.world);
+                                 assert villager != null;
                                  villager.refreshPositionAndAngles(blockpositionofsign.getX(), blockpositionofsign.getY(), blockpositionofsign.getZ(), 0.0F, 0.0F);
                                  this.world.spawnEntity(villager);
                                  VillagerEntity villager2 = EntityType.VILLAGER.create(this.world);
+                                 assert villager2 != null;
                                  villager2.refreshPositionAndAngles(blockpositionofsign.getX(), blockpositionofsign.getY(), blockpositionofsign.getZ(), 0.0F, 0.0F);
                                  this.world.spawnEntity(villager);
                               }
                               return;
                            }
                            VillagerEntity villager = EntityType.VILLAGER.create(this.world);
+                           assert villager != null;
                            villager.refreshPositionAndAngles(blockpositionofsign.getX(), blockpositionofsign.getY(), blockpositionofsign.getZ(), 0.0F, 0.0F);
                            this.world.spawnEntity(villager);
                            //This was some test code to see if everything works, and it does.
-                           /*LightningEntity gonnagetroasted = new LightningEntity(EntityType.LIGHTNING_BOLT,this.world);
-                           gonnagetroasted.setPosition(villager.world.getClosestPlayer(villager.getX(),villager.getY(),villager.getZ(),100,false).getPos());
-                           this.world.spawnEntity(gonnagetroasted);
-                           I'm leaving the code in incase someone wants to know how to make a thunderstrike at a player*/
+                              /*LightningEntity gonnagetroasted = new LightningEntity(EntityType.LIGHTNING_BOLT,this.world);
+                              gonnagetroasted.setPosition(villager.world.getClosestPlayer(villager.getX(),villager.getY(),villager.getZ(),100,false).getPos());
+                              this.world.spawnEntity(gonnagetroasted);
+                              I'm leaving the code in incase someone wants to know how to make a thunderstrike at a player*/
                            //End of test code.
                            return;
                         }
