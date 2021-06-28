@@ -40,18 +40,19 @@ public class Config {
                 FileUtils.touch(configfile);
                 //this.configmap.put("ALLOW_CRAFTING_SIGN",true); TODO implement
                 this.configmap.put("LIMIT_NUMBER_OF_REQRUITABLE_VILLAGERS_AROUND_SIGN",true);
-                this.configmap.put("LIMIT_NUMBER_OF_VISITING_PIGLINS_AROUND_SIGN",false); //TODO implement
-                //this.configmap.put("SCALE_EXPENSIVITY",false); TODO implement
+                this.configmap.put("LIMIT_NUMBER_OF_VISITING_PIGLINS_AROUND_SIGN",true);
+                this.configmap.put("SCALE_EXPENSIVITY",false);
                 this.configmap.put("VILLAGER_LIMIT",4);
                 this.configmap.put("PIGLIN_LIMIT",4);
-                this.configmap.put("SEARCH_RADIUS_AROUND_SIGN",32); //Max is 100, anything larger is uneccesary.
-                this.configmap.put("CHANCE_OF_ARRIVAL",50); //100 would be 50% chance, 101 would be 50.5% chance and so on.
+                this.configmap.put("SEARCH_RADIUS_AROUND_SIGN",10); //Max is 100, anything larger is uneccesary.
+                this.configmap.put("CHANCE_OF_ARRIVAL",150); //100 would be 50% chance, 101 would be 50.5% chance and so on.
                 //because it runs 8 times, the boundary is 1600. 200 would be 10% chance. 100 would be 5% chance.
                 //50 would be 2.5% chance.
-                this.configmap.put("DIAMOND_EXTRA_VILLAGER_CHANCE",20); //10% chance of getting a extra villager.
+                this.configmap.put("DIAMOND_EXTRA_VILLAGER_CHANCE",100); //10% chance of getting a extra villager.
                 this.configmap.put("EMERALD_BLOCK","false");
                 this.configmap.put("DEBUGCONFIG",true); //Prints the config values at the start.
                 this.configmap.put("DEBUGMOD",true); //Prints to console whenever we roll some random or spawn a entity.
+                this.configmap.put("ALLOW_ATTRACTING_PIGLINS_OUTSIDE_OF_NATURAL_BIOME",false); //Prints to console whenever we roll some random or spawn a entity.
                 mapper.writeValue(configfile,this.configmap);
                 if ((boolean)this.configmap.get("DEBUGCONFIG") && !this.WasUnableToCreateOrLoadConfigFile) {
                     System.out.println("[HelpWantedExtended-D]: Printing location of the created config file.");
