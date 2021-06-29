@@ -1,9 +1,9 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "space.mxorbulent.fabricmods.helpwanted.mixin",
+  "package": "space.mxorbulent.fabricmods.helpwantedextended.mixin",
   "compatibilityLevel": "JAVA_16",
-  "mixins": [],
+  "mixins": ["RecipeManagerMixin"],
   "client": [],
   "injectors": {
     "defaultRequire": 1

@@ -1,5 +1,5 @@
 {
-  "parent": "helpwanted:block/piglinpost",
+  "parent": "helpwantedextended:block/piglinpost",
   "display": {
     "gui":
     {

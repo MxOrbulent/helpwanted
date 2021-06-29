@@ -1,5 +1,5 @@
 {
-  "parent": "helpwanted:block/villagerpost",
+  "parent": "helpwantedextended:block/villagerpost",
   "display": {
     "gui":
     {

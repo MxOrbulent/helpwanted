@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "helpwantedextended:block/piglinpost", "y": 180 },
+    "facing=south": { "model": "helpwantedextended:block/piglinpost", "y":0 },
+    "facing=east": { "model": "helpwantedextended:block/piglinpost", "y":270 },
+    "facing=west": { "model": "helpwantedextended:block/piglinpost", "y":90 }
+  }
+}

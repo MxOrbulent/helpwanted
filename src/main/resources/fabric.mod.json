@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "helpwanted",
+  "id": "helpwantedextended",
   "version": "${version}",
-  "name": "Helpwanted",
+  "name": "HelpWantedExtended",
   "description": "Allows you to reqruit villagers by placing down a sign. Mod originally made by captaintenneal81. Because the mod is MIT licensed but no source was provided, I decided to decompile and remap the compiled code and upload it to github.",
   "authors": [
     "MxOrbulent",
@@ -13,16 +13,16 @@
     "repo": "https://github.com/MxOrbulent/helpwanted"
   },
   "license": "MIT",
-  "icon": "assets/helpwanted/helpwantedicon.png",
+  "icon": "assets/helpwantedextended/helpwantedicon.png",
   "environment": "*",
   "entrypoints": {
 
     "main": [
-      "space.mxorbulent.fabricmods.helpwanted.HelpWantedMod"
+      "space.mxorbulent.fabricmods.helpwantedextended.HelpWantedMod"
     ]
   },
   "mixins": [
-    "helpwanted.mixins.json"
+    "helpwantedextended.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.11.6",

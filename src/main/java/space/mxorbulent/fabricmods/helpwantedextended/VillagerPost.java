@@ -1,6 +1,5 @@
-package space.mxorbulent.fabricmods.helpwanted;
+package space.mxorbulent.fabricmods.helpwantedextended;
 
-import java.io.File;
 import java.util.*;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
@@ -9,8 +8,6 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LightningEntity;
-import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -22,13 +19,11 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Position;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.event.listener.GameEventListener;
-import com.mojang.datafixers.types.Type;
 import org.jetbrains.annotations.Nullable;
-import space.mxorbulent.fabricmods.helpwanted.config.Config;
+import space.mxorbulent.fabricmods.helpwantedextended.config.Config;
 
 public class VillagerPost extends BlockWithEntity {
    private static final String id = "villagerpost";
@@ -36,27 +31,26 @@ public class VillagerPost extends BlockWithEntity {
    public static BlockEntityType VILLAGERPOST_ENTITY;
    public static Config configmanager;
 
+
+
    public static void init() {
-      Registry.register((Registry)Registry.BLOCK, new Identifier("helpwanted", "villagerpost"), (Object)VillagerPost.THIS_BLOCK);
-      Registry.register((Registry)Registry.ITEM, new Identifier("helpwanted", "villagerpost"), (Object)new BlockItem(VillagerPost.THIS_BLOCK, new Item.Settings().group(ItemGroup.MISC)));
+      configmanager = HelpWantedMod.configManager;
+      if((boolean) configmanager.configmap.get("DEBUGMOD") && !configmanager.WasUnableToCreateOrLoadConfigFile){
+         System.out.println("[HelpWantedExtended-D]: About to register block helpwantedextended:villagerpost at line 46 VillagerPost.java");
+      }
+      Registry.register((Registry)Registry.BLOCK, new Identifier("helpwantedextended", "villagerpost"), (Object)VillagerPost.THIS_BLOCK);
+      if((boolean) configmanager.configmap.get("DEBUGMOD") && !configmanager.WasUnableToCreateOrLoadConfigFile){
+         System.out.println("[HelpWantedExtended-D]: About to register item helpwantedextended:villagerpost at line 50 VillagerPost.java");
+      }
+      Registry.register((Registry)Registry.ITEM, new Identifier("helpwantedextended", "villagerpost"), (Object)new BlockItem(VillagerPost.THIS_BLOCK, new Item.Settings().group(ItemGroup.MISC)));
       VillagerPost.VILLAGERPOST_ENTITY = FabricBlockEntityTypeBuilder.create(VillagerPostEntity::new, new Block[]
               {VillagerPost.THIS_BLOCK}).build(null);
-      Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier("helpwanted", "villagerpost"), VillagerPost.VILLAGERPOST_ENTITY);
-
-      configmanager = new Config(new File("config/helpwantedextended/config.json"));
-      if (!configmanager.WasUnableToCreateOrLoadConfigFile) {
-         if ((boolean) configmanager.configmap.get("DEBUGCONFIG")) {
-            System.out.println("[HelpWantedExtended-D]: Printing the config values, you should see different values " +
-                    "if you change stuff in the config after stopping and starting.");
-            System.out.println("----------------------------------------");
-            for (Map.Entry<String, Object> entry : configmanager.configmap.entrySet()) {
-               System.out.println(entry.getKey() + ":" + entry.getValue().toString());
-            }
-            System.out.println("----------------------------------------");
-            System.out.println("|                DONE                  |");
-            System.out.println("----------------------------------------");
-         }
+      if((boolean) configmanager.configmap.get("DEBUGMOD") && !configmanager.WasUnableToCreateOrLoadConfigFile){
+         System.out.println("[HelpWantedExtended-D]: About to register block entity type helpwantedextended:villagerpost 56 at line VillagerPost.java");
       }
+      Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier("helpwantedextended", "villagerpost"), VillagerPost.VILLAGERPOST_ENTITY);
+
+
    }
 
    protected VillagerPost(Settings settings) {
@@ -114,6 +108,7 @@ public class VillagerPost extends BlockWithEntity {
       }
 
       public Integer searchForEntitiesAroundSign (BlockPos pos, World worldtosearch, EntityType typeofentity) {
+
          double searchradius = (Integer) configmanager.configmap.get("SEARCH_RADIUS_AROUND_SIGN");
          if (searchradius > 100) {
             searchradius = 100;
@@ -176,7 +171,9 @@ public class VillagerPost extends BlockWithEntity {
 
 
       public void tick() {
-         if (this.world != null && !this.world.isClient) {
+         if (this.world != null && !this.world.isClient && this.world.getRegistryKey() != World.END) {
+
+
             if (this.delay++ > 20) {
                this.delay = 0;
                boolean daychange = !this.wasDay && this.world.isDay();

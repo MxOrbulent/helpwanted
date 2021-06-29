@@ -1,4 +1,4 @@
-package space.mxorbulent.fabricmods.helpwanted;
+package space.mxorbulent.fabricmods.helpwantedextended;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.*;
@@ -19,14 +19,11 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.event.listener.GameEventListener;
 import org.jetbrains.annotations.Nullable;
-import space.mxorbulent.fabricmods.helpwanted.config.Config;
+import space.mxorbulent.fabricmods.helpwantedextended.config.Config;
 
-import java.io.File;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class PiglinPost extends BlockWithEntity {
@@ -37,27 +34,14 @@ public class PiglinPost extends BlockWithEntity {
 
    public static void init() {
       //Piglin Post
-      Registry.register((Registry)Registry.BLOCK, new Identifier("helpwanted", "piglinpost"), (Object)PiglinPost.THIS_BLOCK);
-      Registry.register((Registry)Registry.ITEM, new Identifier("helpwanted", "piglinpost"), (Object)new BlockItem(PiglinPost.THIS_BLOCK, new Item.Settings().group(ItemGroup.MISC)));
+      Registry.register((Registry)Registry.BLOCK, new Identifier("helpwantedextended", "piglinpost"), (Object)PiglinPost.THIS_BLOCK);
+      Registry.register((Registry)Registry.ITEM, new Identifier("helpwantedextended", "piglinpost"), (Object)new BlockItem(PiglinPost.THIS_BLOCK, new Item.Settings().group(ItemGroup.MISC)));
       PiglinPost.PIGLINPOST_ENTITY = FabricBlockEntityTypeBuilder.create(PiglinPost.PiglinPostEntity::new, new Block[]
               {PiglinPost.THIS_BLOCK}).build(null);
-      Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier("helpwanted", "piglinpost"), PiglinPost.PIGLINPOST_ENTITY);
+      Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier("helpwantedextended", "piglinpost"), PiglinPost.PIGLINPOST_ENTITY);
       //End piglin post
 
-      configmanager = new Config(new File("config/helpwantedextended/config.json"));
-      if (!configmanager.WasUnableToCreateOrLoadConfigFile) {
-         if ((boolean) configmanager.configmap.get("DEBUGCONFIG")) {
-            System.out.println("[HelpWantedExtended-D]: Printing the config values, you should see different values " +
-                    "if you change stuff in the config after stopping and starting.");
-            System.out.println("----------------------------------------");
-            for (Map.Entry<String, Object> entry : configmanager.configmap.entrySet()) {
-               System.out.println(entry.getKey() + ":" + entry.getValue().toString());
-            }
-            System.out.println("----------------------------------------");
-            System.out.println("|                DONE                  |");
-            System.out.println("----------------------------------------");
-         }
-      }
+      configmanager = HelpWantedMod.configManager;
    }
 
    protected PiglinPost(Settings settings) {
@@ -156,7 +140,7 @@ public class PiglinPost extends BlockWithEntity {
 
 
 
-         List listofentitiesfound = worldtosearch.getEntitiesByType(typeofentity, boxtosearch, (VillagerEntity) -> true);
+         List listofentitiesfound = worldtosearch.getEntitiesByType(typeofentity, boxtosearch, (PiglinEntity) -> true);
          if (listofentitiesfound.size() >= limit) {
             if((boolean) configmanager.configmap.get("DEBUGMOD") && !configmanager.WasUnableToCreateOrLoadConfigFile){
                System.out.println("[HelpWantedExtended-D]: The limit of entities allowed has been reached or " +
@@ -177,7 +161,7 @@ public class PiglinPost extends BlockWithEntity {
 
 
       public void tick() {
-         if (this.world != null && !this.world.isClient && this.world.getRegistryKey() == World.NETHER) {
+         if (this.world != null && !this.world.isClient && this.world.getRegistryKey() == World.NETHER && this.world.getRegistryKey() != World.END) {
             if (this.delay++ > 20) {
                this.delay = 0;
                boolean daychange = !this.wasDay && this.world.isDay();

@@ -1,11 +1,11 @@
-package space.mxorbulent.fabricmods.helpwanted;
+package space.mxorbulent.fabricmods.helpwantedextended;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
-import space.mxorbulent.fabricmods.helpwanted.config.Config;
+import space.mxorbulent.fabricmods.helpwantedextended.config.Config;
 
 import java.util.Iterator;
 

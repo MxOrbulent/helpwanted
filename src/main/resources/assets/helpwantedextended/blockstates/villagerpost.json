@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "helpwantedextended:block/villagerpost", "y": 180 },
+    "facing=south": { "model": "helpwantedextended:block/villagerpost", "y":0 },
+    "facing=east": { "model": "helpwantedextended:block/villagerpost", "y":270 },
+    "facing=west": { "model": "helpwantedextended:block/villagerpost", "y":90 }
+  }
+}

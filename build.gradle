@@ -42,8 +42,10 @@ dependencies {
     implementation 'com.google.guava:guava:22.0'
 
 	//jackson for JSOn configuration stuff. I want to avoid google as much as possible, so no gson...
-	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
-
+	implementation "com.fasterxml.jackson.core:jackson-databind:${project.jackson_version}"
+	include "com.fasterxml.jackson.core:jackson-databind:${project.jackson_version}"
+	include "com.fasterxml.jackson.core:jackson-core:${project.jackson_version}"
+	include "com.fasterxml.jackson.core:jackson-annotations:${project.jackson_version}"
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
