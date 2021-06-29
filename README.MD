@@ -80,18 +80,33 @@ there's equal to or more than the limit, the spawn fails. This forces players to
 actually improve their villages to make villagers breed. 
 
 However it appears like the piglin functionality got lost when I decompiled and remapped the project. 
-It will be implemented. (TODO)
+It has been reimplemented
 
-You can also disable emerald blocks. It gets ridiculously easy to get emeralds after trading for a while
-without nerfing villager trades with some other mod.
-So you can outright disable the emerald block from counting as a attractive block for villagers. A alternative is provided where you can
-set it to need 2x blocks (TODO, for now you can only disable or enable emerald blocks), which will make it require twice as many emerald blocks.
+EMERALD_BLOCKS can either be enabled (true), disabled (false) or set to "2x".
+2x causes Emerald blocks to only be worth half a villager. Meaning 2 are required for a villagers to spawn.
+If SCALED_EXPENSIVITY is on, EMERALD_BLOCKS only adds 1 to the calculations instead of two.
 
 Finally, you can make it more expensive to recruit villagers by setting SCALE_EXPENSIVITY to true. (TODO)
-If you do this, every villager reqruited will require another block to reqruit another villagers.
-The scaling is simple. After you have 2 villagers, it will add 1 block as a requirement. 
+If you do this, after 2 villagers, additional blocks required increases with this formula.
+(int) Math.floor((numberOfFoundEntities / 2) + (numberOfFoundEntities - 2));
+Then numberOfEntitiesToSpawn = totalnumberofblocks - formula;
+
+So let's say you found 4 villagers already.
+4/2 + 4-2 = 4
+The 5th villager you are trying to spawn will cost 4 blocks.
+Scaling only starts from the third villager and onwards. I.E
+
+3/2 = 1.5 = 1 +1
+The fourth villager will cost 2 blocks.
+
+6 villagers and trying to spawn a 7th?
+6/2 + 6-2 = 6.
+The 7th villager will cost 6 blocks to spawn.
 
 CHANCE_OF_EXTRA_VILLAGER_DIAMOND_BLOCK allows you to have a small chance to get 2 villagers instead of just 1.
+If used together with SCALED_EXPENSIVITY, it simply allows you to have a small chance of attracting two villagers instead of one.
+
+
 ### I have changes I want to make
 Fork the repo. If your idea is good you can attempt to make a pull request. I will accept them if they make sense.
 But I ask that you please wait until I'm done implementing the config so that we have a proper baseline to move on from onwards.
