@@ -31,7 +31,8 @@ You are of course under no obligation to do so. But it would be helpfull.
 
 ### Don't you need to ask for permission?
 The original creator set his release as MIT, this means that doing basically anything with the compiled binaries are
-100% fair game. So no, I don't need his permission at all. The only thing I need to provide is a MIT license.
+100% fair game. So no, I don't need his permission at all. The only thing I need to provide is a MIT license, or heck I could even have relicensed it.
+But I choose to pass it on as MIT. 
 
 ### Why not also decompile and remap for Forge?
 I have no interest in Forge. You have the source now, do it yourself. I spent some 8 hours studying
